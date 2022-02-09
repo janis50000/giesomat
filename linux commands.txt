@@ -1,0 +1,12 @@
+List files and sub folders in folder
+ls
+
+Change directory
+cd . => one folder back
+cd sub_folder => move to sub_folder
+
+Create new folder
+mkdir
+
+
+

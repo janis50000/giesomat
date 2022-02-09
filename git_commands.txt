@@ -1,0 +1,34 @@
+git configuration
+
+git config --global user.name "janis50000"
+git config --global user.email email.adress@gmail.com
+
+Initialize git in local folder:
+git init
+
+add everything in local folder to source controll
+git add .
+
+commit 
+git commit -m"Some message"
+
+push changes to global repo
+git push
+
+pull global repo to local file system
+git pull
+
+show all branches
+git branch -a 
+
+get some_branch, when this branch does not exists, it is created.
+git checkout -b some_branch
+
+get back to master branch
+git checkout master
+
+merge some_branch to master branch
+git merge some_branch
+
+Clone repo from git to local folder in RPI
+git clone https://github.com/......
