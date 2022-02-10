@@ -1,0 +1,7 @@
+https://www.w3schools.com/python/default.asp
+
+Install a module with pip
+python3 -m pip install Django==4.02
+
+Check django version
+python3 -m django --version

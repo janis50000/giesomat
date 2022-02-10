@@ -1,0 +1,22 @@
+GPIO Pins:
+https://pi4j.com/1.2/pins/model-zerow-rev1.html
+
+
+
+Setup SSH and desktop sharing:
+https://42bots.com/tutorials/access-raspberry-pi-terminal-and-desktop-remotely-with-ssh-and-vnc/
+
+
+Change hostname
+https://www.tomshardware.com/how-to/raspberry-pi-change-hostname
+
+sudo nano /etc/hosts
+Change name ("raspberrypi" to "giesomat")
+ctrl + x => save
+
+sudo nano /etc/hostname
+Change name ("raspberrypi" to "giesomat")
+ctrl + x => save
+
+reboot the raspberrypi
+sudi reboot
