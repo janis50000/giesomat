@@ -1,0 +1,25 @@
+https://docs.djangoproject.com/en/4.0/intro/tutorial07/
+
+
+https://medium.com/@distillerytech/building-for-flexibility-using-finite-state-machines-in-django-2e36ddbd7708
+pip install django-fsm
+Git:
+https://github.com/viewflow/django-fsm
+
+
+https://testdriven.io/blog/django-charts/
+
+
+
+Crontab macht alles, was ich brauche:
+https://pypi.org/project/django-crontab/
+
+=> Ich muss noch shcauen , wie ich ein manage.py command über einen button klick im ui ansteure.
+=> so könnte es klappen:
+https://stackoverflow.com/questions/907506/how-can-i-call-a-custom-django-manage-py-command-directly-from-a-test-driver
+
+
+
+(etwas schwergewichtiger)
+https://docs.celeryproject.org/en/stable/userguide/periodic-tasks.html
+https://stackoverflow.com/questions/573618/set-up-a-scheduled-job
