@@ -10,7 +10,7 @@ while True:
     if GPIO.input(24) == 0:
         # Ausschalten
         #GPIO.output(23, GPIO.LOW)
-        PIO.output(23, GPIO.HIGH)
+        GPIO.output(23, GPIO.HIGH)
     else:
         # Einschalten
         #GPIO.output(23, GPIO.HIGH)

@@ -20,3 +20,6 @@ ctrl + x => save
 
 reboot the raspberrypi
 sudi reboot
+
+
+ssh pi@raspberry.local
