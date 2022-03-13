@@ -1,0 +1,53 @@
+
+This must be done in the project folder:
+
+Create a new app in a django project:
+python3 manage.py startapp statemachinePoc
+
+
+Load internal dependencies:
+python3 -m django makemigrations --settings=helloworld.settings
+
+Load new dependencies
+python3 -m django migrate --settings=helloworld.settings
+
+Open the shell to play around with the data model/ API
+python3 manage.py shell 
+python3 manage.py shell --settings=helloworld.settings
+
+
+Create a super user for the admin
+python3 manage.py createsuperuser
+
+jan
+123
+
+run the development server
+python3 manage.py runserver
+
+run unit tests for the polls app
+
+python3 manage.py test jobscheduler
+
+
+HowTo install Django:
+python3 -m pip install Django==4.02
+
+Install Django fsm:
+pip install django-fsm
+
+Install Crontab
+pip install django-crontab
+Handle Crontab:
+python3 manage.py crontab add
+python3 manage.py crontab show
+python3 manage.py crontab remove
+python3 manage.py crontab run 9355c8d76fd01f7da7e0e3f05c0a3440
+
+
+Django UI Template:
+https://github.com/creativetimofficial/black-dashboard-django
+
+
+Cron Job Datenbank Konfiguration:
+https://djangosnippets.org/snippets/1127/
