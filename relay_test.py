@@ -9,20 +9,24 @@ PIN_PUMP = 26
 PINS_VALVE = [5, 6, 13, 19] #GND => 26 => 19 => 13 => 6 => 5
 ID_VALVE = [1,2,3,4] #
 
+TIME = 2 # seconds
+TEST_RUNS = 100 # number of test runs
+
 init_gpio([PIN_SENSOR], [PIN_PUMP], [PIN_VALVE])
 
+i = o
 
-while True:
-    print(GPIO.input(24))
-    if GPIO.input(24) == 0:
-        # Ausschalten
-        GPIO.output(23, GPIO.LOW)
-    else:
-        # Einschalten
-        GPIO.output(23, GPIO.HIGH)
-    
-    time.sleep(0.5)
+while i<= TEST_RUNS:
+    pump_on()    
+    time.sleep(TIME)
+    pump_off()
 
+    for valve in ID_VALVE:
+        open_valve(valve)
+        time.sleep(TIME)
+        close_valve(valve)
+
+    i = i +1
 
 
 def pump_on():

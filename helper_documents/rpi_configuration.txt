@@ -22,4 +22,4 @@ reboot the raspberrypi
 sudi reboot
 
 
-ssh pi@raspberry.local
+ssh pi@raspberrypi.local
