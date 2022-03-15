@@ -8,7 +8,7 @@ from giesomat_utility import pump_on, pump_off, open_valve, close_valve
 #initialize pins
 PIN_SENSOR = 24 
 PIN_PUMP = 26
-PINS_VALVE = [5, 6, 13, 19] #GND => 26 => 19 => 13 => 6 => 5
+PINS_VALVE = [19, 13, 6, 5] #GND => 26 => 19 => 13 => 6 => 5 (left to right in RPI)
 ID_VALVE = [1,2,3,4] #
 
 TIME = 2 # seconds
@@ -19,7 +19,7 @@ init_gpio([PIN_SENSOR], [PIN_PUMP, PINS_VALVE])
 i = 0
 
 while i<= TEST_RUNS:
-    
+
     pump_on()    
     time.sleep(TIME)
     pump_off()
