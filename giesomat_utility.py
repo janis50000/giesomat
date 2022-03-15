@@ -2,7 +2,8 @@
 from raspberry_gpio_control import setpin_high, setpin_low
 
 PIN_PUMP = 26
-PINS_VALVE = [5, 6, 13, 19] #GND => 26 => 19 => 13 => 6 => 5
+PINS_VALVE = [19, 13, 6, 5] #GND => 26 => 19 => 13 => 6 => 5 (left to right in RPI)
+
 #ID_VALVE = [1,2,3,4] #
 
 
