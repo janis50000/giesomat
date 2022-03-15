@@ -7,11 +7,11 @@ PINS_VALVE = [5, 6, 13, 19] #GND => 26 => 19 => 13 => 6 => 5
 
 
 def pump_on():
-    setpin_high(PIN_PUMP)
+    setpin_low(PIN_PUMP)
     return
 
 def pump_off():
-    setpin_low(PIN_PUMP)
+    setpin_high(PIN_PUMP)
     return
 
 def open_valve(valve_id):
