@@ -9,7 +9,7 @@ def init_gpio(input_pins, output_pins_pump, output_pins_valve):
     for pin in input_pins:
         GPIO.setup(pin, GPIO.IN)
 
-     for pin in output_pins_pump:
+    for pin in output_pins_pump:
         GPIO.setup(pin, GPIO.OUT)
         #Initialize Output to High.
         GPIO.output(pin, GPIO.LOW)
