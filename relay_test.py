@@ -1,7 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 
-from raspberry_gpio_control import init_gpio, setpin_high, setpin_low
+from raspberry_gpio_control import init_gpio
+from giesomat_utility import pump_on, pump_off, open_valve, close_valve
+
 
 #initialize pins
 PIN_SENSOR = 24 
@@ -27,23 +29,6 @@ while i<= TEST_RUNS:
         close_valve(valve)
 
     i = i +1
-
-
-def pump_on():
-    setpin_high(PIN_PUMP)
-    return
-
-def pump_off():
-    setpin_low(PIN_PUMP)
-    return
-
-def open_valve(valve_id):
-    setpin_low(PINS_VALVE[valve_id-1]) #set pin low because of opocoupler
-    return
-
-def close_valve(valve_id):
-    setpin_high(PINS_VALVE[valve_id-1]) #set pin low because of opocoupler
-    return
 
 
 
