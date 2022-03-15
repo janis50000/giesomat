@@ -14,7 +14,7 @@ TEST_RUNS = 100 # number of test runs
 
 init_gpio([PIN_SENSOR], [PIN_PUMP], [PIN_VALVE])
 
-i = o
+i = 0
 
 while i<= TEST_RUNS:
     pump_on()    
