@@ -14,7 +14,7 @@ ID_VALVE = [1,2,3,4] #
 TIME = 2 # seconds
 TEST_RUNS = 100 # number of test runs
 
-init_gpio([PIN_SENSOR], [PIN_PUMP], [PINS_VALVE])
+init_gpio([PIN_SENSOR], [PIN_PUMP, PINS_VALVE])
 
 i = 0
 

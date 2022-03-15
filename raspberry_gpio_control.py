@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-def init_gpio(input_pins, output_pins_pump, output_pins_valve):
+def init_gpio(input_pins, output_pins):
     #read database and set pins
     #here it is still hard coded
     GPIO.setwarnings(False)
@@ -9,12 +9,7 @@ def init_gpio(input_pins, output_pins_pump, output_pins_valve):
     for pin in input_pins:
         GPIO.setup(pin, GPIO.IN)
 
-    for pin in output_pins_pump:
-        GPIO.setup(pin, GPIO.OUT)
-        #Initialize Output to High.
-        GPIO.output(pin, GPIO.LOW)
-
-    for pin in output_pins_valve:
+    for pin in output_pins:
         GPIO.setup(pin, GPIO.OUT)
         #Initialize Output to High.
         GPIO.output(pin, GPIO.HIGH)
