@@ -128,3 +128,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CELERY_TASK_ALWAYS_EAGER = True
+CELERY_BROKER_URL = "amqp://giesomat:giesomat@localhost"
+
+#export DJANGO_SETTINGS_MODULE = "settings"

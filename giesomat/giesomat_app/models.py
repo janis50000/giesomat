@@ -56,22 +56,26 @@ class Plant(models.Model):
     @transition(field=current_status, source=PLANT_STATE_THIRSTY, target=PLANT_STATE_THIRSTY)
     @transition(field=current_status, source=PLANT_STATE_HAPPY, target=PLANT_STATE_THIRSTY)
     def is_thirsty(self):
-        self.save()
+        #self.save()
+        return
 
     #@transition(field=current_status, source=PLANT_STATE_WATERED, target=PLANT_STATE_WATERED)
     @transition(field=current_status, source=PLANT_STATE_THIRSTY, target=PLANT_STATE_WATERED)
     def is_watered(self):
-        self.save()
+        #self.save()
+        return
 
     @transition(field=current_status, source=PLANT_STATE_HAPPY, target=PLANT_STATE_HAPPY)
     @transition(field=current_status, source=PLANT_STATE_WATERED, target=PLANT_STATE_HAPPY)
     def is_happy(self):
-        self.save()
+        #self.save()
+        return
 
     @transition(field=current_status, source=PLANT_STATE_THIRSTY, target=PLANT_STATE_THIRSTY)
     @transition(field=current_status, source=PLANT_STATE_WATERED, target=PLANT_STATE_THIRSTY)
     def is_still_thirsty(self):
-        self.save()
+        #self.save()
+        return
     
     @admin.display(
         boolean=True,

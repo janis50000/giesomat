@@ -1,0 +1,23 @@
+To run celery beat I need a rabitMQ queue
+
+- Install rabitMQ
+- Setup user and pw
+- auto start server on system start
+
+
+MQ Server starten
+rabbitmq-server -detached
+rabbitmqctl stop
+rabbitmqctl status
+
+
+rabbitmqctl add_user giesomat giesomat
+rabbitmqctl add_vhost myvhost
+rabbitmqctl set_user_tags giesomat gies_tag
+rabbitmqctl set_permissions -p myvhost giesomat ".*" ".*" ".*"
+rabbitmqctl set_permissions -p administrator giesomat ".*" ".*" ".*"
+rabbitmqctl set_permissions -p / giesomat ".*" ".*" ".*"
+
+
+Start celery worker:
+celery -A giesomat_app worker --loglevel=INFO

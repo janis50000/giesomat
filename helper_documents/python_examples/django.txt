@@ -62,3 +62,6 @@ Das Tutorial ist mit Email Anbindung - könnte perspektivisch interessant sein.
 https://dev.to/daeenchoi/database-scheduler-with-celery-beat-and-manage-schedule-in-django-admin-il5
 
 pip install django-celery-beat
+
+Das Tutorial zeigt, wie man das Ganze in Docker packt:
+testdrivern.io/blog/django-and-celery/#celery-setup

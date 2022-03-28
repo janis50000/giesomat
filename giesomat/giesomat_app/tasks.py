@@ -1,9 +1,11 @@
 from celery import shared_task
+from .backend_logic.make_plants_thirsty import make_plants_thirsty
 
 #ToDo Jan: Add 3 tasks: Read sensors, water plants based on sensor values and water plants based on schedule
 
+#@shared_task(name="read_plant_humidity", bind=True, default_retry_delay=300, max_retries=3)
 @shared_task(name="read_plant_humidity", bind=True, default_retry_delay=300, max_retries=3)
-def read_plant_humidity(self, subject, message):
+def read_plant_humidity(self):
     try:
         print("Read plant humidity.")
         return
@@ -23,8 +25,9 @@ def water_all_thirsty_plants(self):
 
 
 @shared_task(name="make_plants_thirsty_on_schedule", bind=True, default_retry_delay=300, max_retries=3)
-def make_plants_thirsty_on_schedule(self, subject, message):
+def make_plants_thirsty_on_schedule(self):
     try:
+        make_plants_thirsty()
         print("Water plants based on schedule.")
         return
 

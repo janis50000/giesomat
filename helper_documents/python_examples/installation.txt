@@ -1,0 +1,19 @@
+Installation on RPI:
+- Django
+- State Machine
+- Django Celery Beat
+- AMQP
+
+
+
+Setup:
+- Django Superuser
+- AMQP user
+- 
+
+
+At RPI Boot:
+- Run Django App in Docker
+- Run AMQP
+- Start Celery
+- Initialize RPI GPIO
