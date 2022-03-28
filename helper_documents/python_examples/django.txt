@@ -1,25 +1,27 @@
 
+django-admin startproject giesomat
+
 This must be done in the project folder:
 
 Create a new app in a django project:
-python3 manage.py startapp statemachinePoc
+python3 manage.py startapp giesomat
 
 
 Load internal dependencies:
-python3 -m django makemigrations --settings=helloworld.settings
+python3 -m django makemigrations --settings=giesomat.settings
 
 Load new dependencies
-python3 -m django migrate --settings=helloworld.settings
+python3 -m django migrate --settings=giesomat.settings
 
 Open the shell to play around with the data model/ API
 python3 manage.py shell 
-python3 manage.py shell --settings=helloworld.settings
+python3 manage.py shell --settings=giesomat.settings
 
 
 Create a super user for the admin
 python3 manage.py createsuperuser
 
-jan
+admin
 123
 
 run the development server
@@ -27,7 +29,7 @@ python3 manage.py runserver
 
 run unit tests for the polls app
 
-python3 manage.py test jobscheduler
+python3 manage.py test giesomat_app
 
 
 HowTo install Django:
@@ -51,3 +53,12 @@ https://github.com/creativetimofficial/black-dashboard-django
 
 Cron Job Datenbank Konfiguration:
 https://djangosnippets.org/snippets/1127/
+
+
+Besser als Crontab:
+
+Celery Beat - Hier werden die Tasks automatisch in der Datenbank gespeichert.
+Das Tutorial ist mit Email Anbindung - könnte perspektivisch interessant sein.
+https://dev.to/daeenchoi/database-scheduler-with-celery-beat-and-manage-schedule-in-django-admin-il5
+
+pip install django-celery-beat

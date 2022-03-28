@@ -1,5 +1,7 @@
+#To execute this script on boot up, do the following:
 #sudo nano /etc/rc.local
-#python /home/giesomat/init_pins_on_boot.py
+#python /home/pi/giesomat/init_pins_on_boot.py &
+#python /home/pi/giesomat/relay_test.py &
 
 
 import RPi.GPIO as GPIO

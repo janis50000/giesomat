@@ -1,4 +1,8 @@
-import RPi.GPIO as GPIO
+#Import RPI libraries when running on target. Import test utilities when running on computer.
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+     from .test_utility import GPIO
 
 def init_gpio(input_pins, output_pins):
     #read database and set pins
