@@ -106,10 +106,10 @@ class Valve(models.Model):
         return 'Valve ' + str(self.id)
 
 class PlantTechnical(models.Model):
-    plant = models.ForeignKey(Plant, on_delete =models.CASCADE, blank=True)
-    sensor = models.ForeignKey(Sensor, on_delete = models.CASCADE, blank=True)
-    pump = models.ForeignKey(Pump, on_delete = models.CASCADE, blank=True)
-    valve = models.ForeignKey(Valve, on_delete = models.CASCADE, blank=True)
+    plant = models.ForeignKey(Plant, on_delete =models.CASCADE, null=True, blank=True)
+    sensor = models.ForeignKey(Sensor, on_delete = models.CASCADE,null=True, blank=True)
+    pump = models.ForeignKey(Pump, on_delete = models.CASCADE,null=True, blank=True)
+    valve = models.ForeignKey(Valve, on_delete = models.CASCADE,null=True, blank=True)
     def __str__(self):
         return 'Technical information for ' + str(self.plant)
 
