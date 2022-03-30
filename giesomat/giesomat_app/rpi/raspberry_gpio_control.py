@@ -4,6 +4,7 @@ try:
 except ImportError:
      from .test_utility import GPIO
 
+#Re-Write this to incorporate the current code.
 def init_gpio(input_pins, output_pins):
     #read database and set pins
     #here it is still hard coded
@@ -18,6 +19,14 @@ def init_gpio(input_pins, output_pins):
         #Initialize Output to High.
         GPIO.output(pin, GPIO.HIGH)
 
+def initialize_input_pin(pin_id):
+    GPIO.setup(pin_id, GPIO.IN)    
+    return
+
+def initialize_output_pin(pin_id):
+    GPIO.setup(pin_id, GPIO.OUT)
+    #Initialize Output to High.
+    GPIO.output(pin_id, GPIO.HIGH)    
 
 def setpin_high(pin_id):
     GPIO.output(pin_id, GPIO.HIGH)

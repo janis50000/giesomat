@@ -2,6 +2,8 @@ from django.db import models
 from django_fsm import transition, FSMIntegerField
 from django.contrib import admin
 
+from .rpi.raspberry_gpio_control import initialize_input_pin, initialize_output_pin
+
 
 '''
 Next steps:
@@ -93,17 +95,34 @@ class Sensor(models.Model):
     def __str__(self):
         return 'Sensor ' + str(self.id)
 
+    def save(self, *args, **kwargs):
+        super(Sensor, self).save(*args, **kwargs)
+        #Extended to initialize the RPI sensor pin on object creation
+        initialize_input_pin(self.gpio_pin)
+
+
 class Pump(models.Model):
     gpio_pin = models.IntegerField(help_text='Raspberry Pi GPIO Pin of the pump.')
     water_flow_per_minute = models.IntegerField(default = 5000, help_text='Calibration parameter: The water flow through the pump per minute in milli liter')
     def __str__(self):
         return 'Pump ' + str(self.id)
 
+    def save(self, *args, **kwargs):
+        super(Pump, self).save(*args, **kwargs)
+        #Extended to initialize the RPI sensor pin on object creation
+        initialize_output_pin(self.gpio_pin)
+
 class Valve(models.Model):
     gpio_pin = models.IntegerField(help_text='Raspberry Pi GPIO Pin of the valve.')
     time_offset = models.IntegerField(default = 0, help_text='Optional calibration parameter: The time it takes from starting the pump until the water reaches the plant.')
     def __str__(self):
         return 'Valve ' + str(self.id)
+
+    def save(self, *args, **kwargs):
+        super(Valve, self).save(*args, **kwargs)
+        #Extended to initialize the RPI sensor pin on object creation
+        initialize_output_pin(self.gpio_pin)
+
 
 class PlantTechnical(models.Model):
     plant = models.ForeignKey(Plant, on_delete =models.CASCADE, null=True, blank=True)
