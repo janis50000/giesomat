@@ -113,6 +113,15 @@ class PlantTechnical(models.Model):
     def __str__(self):
         return 'Technical information for ' + str(self.plant)
 
+class PlantHistoryWater(models.Model):
+    plant = models.ForeignKey(Plant, on_delete =models.CASCADE, null=True, blank=True)
+    water_volume = models.DecimalField(max_digits=9, decimal_places=2, default=0, help_text='How much water was given to the plant in ml?')
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=False)
+    def __str__(self):
+        return 'Water information for ' + str(self.plant) + ' at ' + str(self.timestamp)
+
+    
+
 #Plant
     #ID
     #Name
@@ -160,7 +169,6 @@ class PlantTechnical(models.Model):
     #Water_Volume
     #TTL
 
-    #=> Hier auch methoden schreiben, um die Werte gleich zu setzen. Mit PlantHistoryWater.addMeasurement(plant,value)
 
 #PlantHistorySensor
     #ID
