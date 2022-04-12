@@ -1,0 +1,4 @@
+Django==4.04
+django-celery-beat==2.21
+django-fsm==2.8.0
+

@@ -38,21 +38,8 @@ python3 -m pip install Django==4.02
 Install Django fsm:
 pip install django-fsm
 
-Install Crontab
-pip install django-crontab
-Handle Crontab:
-python3 manage.py crontab add
-python3 manage.py crontab show
-python3 manage.py crontab remove
-python3 manage.py crontab run 9355c8d76fd01f7da7e0e3f05c0a3440
-
-
 Django UI Template:
 https://github.com/creativetimofficial/black-dashboard-django
-
-
-Cron Job Datenbank Konfiguration:
-https://djangosnippets.org/snippets/1127/
 
 
 Besser als Crontab:
