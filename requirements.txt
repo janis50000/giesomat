@@ -1,4 +1,4 @@
-Django
+Django==3.9.9
 django-celery-beat
 django-fsm==2.8.0
 
