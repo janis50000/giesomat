@@ -5,6 +5,14 @@
 This is a leraning project where we built a plant watering system based driven by a raspberry pi.
 ```
 
+## SSH to the RPI
+
+```
+ssh pi@raspberrypi.local
+exit ssh
+```
+
+
 ##Installation
 
 ```
@@ -20,11 +28,22 @@ Grant access for your ssh user
 sudo usermod -aG docker pi
 ```
 
-install docker
 ### Run rabbitmq on docker
+
+It is important to find a rabbitmq docker image that fits your system architecture.
+My system architecture is linux/arm/v6 and the latest image that supports this architecture is 3.10.0-rc.3-management-alpine.
 ```
-sudo docker pull rabbitmq:latest
+docker pull rabbitmq:3.10.0-rc.3-management-alpine
 ```
+Run the docker image:
+```
+docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.10.0-rc.3-management-alpine
+Check the status of your container
+```
+docker ps -a
+docker logs [container id]
+```
+
 
 ### Setup git on your rpi and pull the repo
 
