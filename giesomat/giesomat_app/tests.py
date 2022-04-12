@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 #Imports for the State Machine Tests
-from .models import Plant, Pump, Valve, PlantTechnical, PlantHistoryWater
+from .models import Plant, Pump, Valve, PlantTechnical, PlantHistoryWater,Sensor
 from django_fsm import TransitionNotAllowed
 
 #Import for the RPI Tests
@@ -17,8 +17,12 @@ from .celery import app as celery_app
 #Imports for Backend Logic Tests
 from .backend_logic.make_plants_thirsty import make_plants_thirsty
 from .backend_logic.water_thirsty_plants import water_thirsty_plants,water_plant_entry, water_plant, add_measurement
+from .backend_logic.initialize import initialize_hardware, get_plant_output_pins, get_plant_input_pins
+
 
 from django.utils import timezone
+
+
 
 
 class PlantStateMachineTests(TestCase):
@@ -315,7 +319,83 @@ class BackendTestsWaterPlants(TestCase):
         self.assertEqual(1,1)        #NO nice assert but I just want to see that there is no error. 
 
 
-'''
+class BackendTestsInitialize(TestCase):
+    def test_get_plant_output_pins_one_plant(self):
+        water_need = 500
+        plant = create_full_plant(plant_name = "Test Plant", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        pump= create_pump(1, 5000000) #Some high value to speed up the tests.
+        valve = create_valve(2, 0)
+        plant_technical = create_plant_technical(plant, None, pump, valve)
+        plant_technicals = PlantTechnical.objects.filter(pk = plant_technical.pk) #Should be 1:1 but technically can be 1:n
+        output_pins = get_plant_output_pins(plant_technicals)
+        self.assertIn('1',''.join(str(e) for e in output_pins))
+        self.assertIn('2',','.join(str(e) for e in output_pins))
+
+    def test_get_plant_output_pins_two_plants(self):
+        water_need = 500
+        plant = create_full_plant(plant_name = "Test Plant", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        pump1= create_pump(1, 5000000) #Some high value to speed up the tests.
+        valve1 = create_valve(999, 0)
+        plant_technical1 = create_plant_technical(plant, None, pump1, valve1)
+        pump2= create_pump(1111, 5000000) #Some high value to speed up the tests.
+        valve2 = create_valve(2, 0)
+        plant_technical2 = create_plant_technical(plant, None, pump2, valve2)
+        plant_technicals = PlantTechnical.objects.filter(plant = plant.pk) #Should be 1:1 but technically can be 1:n
+        output_pins = get_plant_output_pins(plant_technicals)
+        self.assertIn('1',''.join(str(e) for e in output_pins))
+        self.assertIn('2',''.join(str(e) for e in output_pins))
+        self.assertIn('999',''.join(str(e) for e in output_pins))
+        self.assertIn('111',''.join(str(e) for e in output_pins))
+
+    def test_get_plant_input_pins_one_plant(self):
+        water_need = 500
+        plant = create_full_plant(plant_name = "Test Plant", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        sensor = create_sensor(1, 5000000,5000000,5000000) #Some high value to speed up the tests.
+        plant_technical = create_plant_technical(plant, sensor, None, None)
+        plant_technicals = PlantTechnical.objects.filter(pk = plant_technical.pk) #Should be 1:1 but technically can be 1:n
+        input_pins = get_plant_input_pins(plant_technicals)
+        self.assertIn('1',''.join(str(e) for e in input_pins))
+
+    def test_get_plant_input_pins_two_plants(self):
+        water_need = 500
+        plant = create_full_plant(plant_name = "Test Plant", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        sensor1 = create_sensor(1, 5000000,5000000,5000000) #Some high value to speed up the tests.
+        plant_technical1 = create_plant_technical(plant, sensor1, None, None)
+        sensor2 = create_sensor(999, 5000000,5000000,5000000) #Some high value to speed up the tests.
+        plant_technical2 = create_plant_technical(plant, sensor2, None, None)
+        plant_technicals = PlantTechnical.objects.filter(plant = plant.pk) #Should be 1:1 but technically can be 1:n
+        input_pins = get_plant_input_pins(plant_technicals)
+        self.assertIn('1',''.join(str(e) for e in input_pins))
+        self.assertIn('999',''.join(str(e) for e in input_pins))
+
+    def test_initialize_one_plant(self):
+        water_need = 500
+        plant = create_full_plant(plant_name = "Test Plant", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        sensor1 = create_sensor(1, 5000000,5000000,5000000) #Some high value to speed up the tests.
+        pump1= create_pump(2, 5000000) #Some high value to speed up the tests.
+        valve1 = create_valve(3, 0)
+        plant_technical1 = create_plant_technical(plant, sensor1, pump1, valve1)
+        #plant_technicals = PlantTechnical.objects.filter(plant = plant.pk) #Should be 1:1 but technically can be 1:n
+        initialize_hardware()
+        self.assertEqual(1,1) #test if no error is thrown, checked with print() during programming
+
+    def test_initialize_two_plants(self):
+        water_need = 500
+        plant1 = create_full_plant(plant_name = "Test Plant1", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        sensor1 = create_sensor(1, 5000000,5000000,5000000) #Some high value to speed up the tests.
+        pump1= create_pump(2, 5000000) #Some high value to speed up the tests.
+        valve1 = create_valve(3, 0)
+        plant_technical1 = create_plant_technical(plant1, sensor1, pump1, valve1)
+        plant2 = create_full_plant(plant_name = "Test Plant2", water_mode = Plant.WATER_MODE_CYCLICAL, is_active= True, water_need = water_need)
+        sensor2 = create_sensor(1, 5000000,5000000,5000000) #Some high value to speed up the tests.
+        pump2= create_pump(2, 5000000) #Some high value to speed up the tests.
+        valve2 = create_valve(3, 0)
+        plant_technical1 = create_plant_technical(plant2, sensor2, pump2, valve2)
+        #plant_technicals = PlantTechnical.objects.filter(plant = plant.pk) #Should be 1:1 but technically can be 1:n
+        initialize_hardware()
+        self.assertEqual(1,1) #test if no error is thrown, checked with print() during programming
+
+
 #This is a full integration test. Make sure that rabbitMQ server runs on your system.
 #Connection refused error => The rabbitMQ server is not running.
 class CeleryBeatTaskTests(TransactionTestCase):
@@ -349,7 +429,7 @@ class CeleryBeatTaskTests(TransactionTestCase):
         result = make_plants_thirsty_on_schedule.delay()
         print(result.state)
         self.assertEqual(result.state, "SUCCESS")
-'''
+
 
 
 def create_pump(gpio_pin, water_flow_per_minute):
@@ -369,3 +449,6 @@ def create_plant(plant_name, water_mode):
 
 def read_plant(plant_id):
     return Plant.objects.get(pk=plant_id)
+
+def create_sensor(gpio_pin, max_sensor_value, min_sensor_value,sensor_threshold):
+    return Sensor.objects.create(gpio_pin= gpio_pin, max_sensor_value=max_sensor_value, min_sensor_value=min_sensor_value, sensor_threshold=sensor_threshold)
