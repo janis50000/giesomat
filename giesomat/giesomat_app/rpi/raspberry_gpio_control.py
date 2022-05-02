@@ -4,6 +4,9 @@ try:
 except ImportError:
      from .test_utility import GPIO
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
 #Re-Write this to incorporate the current code.
 def init_gpio(input_pins, output_pins):
     #read database and set pins
