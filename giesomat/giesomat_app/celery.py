@@ -5,8 +5,8 @@ import django
 from django.conf import settings
 
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.celeryconfig')
-#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.settings')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', )
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.settings')
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', )
 
 #django.setup()
 
