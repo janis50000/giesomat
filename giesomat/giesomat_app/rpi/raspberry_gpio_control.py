@@ -7,9 +7,6 @@ except ImportError:
 #Re-Write this to incorporate the current code.
 def init_gpio(input_pins, output_pins):
     #read database and set pins
-    #here it is still hard coded
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
     
     for pin in input_pins:
         GPIO.setup(pin, GPIO.IN)

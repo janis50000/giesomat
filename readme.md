@@ -55,9 +55,55 @@ git clone https://github.com/janis50000/giesomat
 ```
 
 Install dependencies
+navigate to the giesomat repo before installing dependencies.
 ```
 pip install --upgrade pip
 pip install --no-cache-dir -r requirements.txt
+```
+
+Configure the Django app
+
+```
+python3 -m django makemigrations --settings=giesomat.settings
+python3 -m django migrate --settings=giesomat.settings
+```
+
+Create a superuser for your app
+```
+python3 manage.py createsuperuser
+```
+
+Make sure that the RPI gets automatically setup on boot:
+
+To execute the boot scripts script on boot up, do the following:
+cd .. to the root of the rpi and navigate tho the following file:
+```
+sudo nano /etc/rc.local
+```
+
+Edit this file with the following lines and save:
+```
+docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.10.0-rc.3-management-alpine &
+python -c 'from /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py import boot_rpi; boot_rpi()' &
+python -c 'from /home/pi/giesomat/giesomat/giesomat_app/backend_logic/initialize.py import initialize_hardware; initialize_hardware()' &
+```
+
+Obsolete
+#python /home/pi/giesomat/init_pins_on_boot.py &
+#python /home/pi/giesomat/relay_test.py &
+$ python -c 'from foo import hello; print hello()'
+
+
+Test if everything works as designed
+```
+cd giesomat/giesomat
+python manage.py test giesomat_app
+```
+
+Now you are ready to rumble
+```
+cd giesomat/giesomat
+python manage.py runserver
 ```
 
 

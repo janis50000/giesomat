@@ -7,7 +7,7 @@ def initialize_hardware():
     output_pins = []
     plants_to_initialize = Plant.objects.exclude(is_active=False)
     for plant in plants_to_initialize:
-        print(plant)
+        #print(plant)
         plant_technicals = PlantTechnical.objects.filter(plant=plant.pk) #Should be 1:1 but technically can be 1:n
         plant_output_pins = get_plant_output_pins(plant_technicals)
         output_pins.append(plant_output_pins)
