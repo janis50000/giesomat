@@ -93,7 +93,7 @@ To Do:
 
 Run Worker:
 cd giesomat/giesomat
-celery -A giesomat_app worker --loglevel=INFO
+celery -A giesomat_app worker --loglevel=INFO --detach
 
 
 Obsolete
