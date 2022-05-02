@@ -126,9 +126,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+'''
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_IMPORTS = ('giesomat_app.tasks',)
-
+'''
 #export DJANGO_SETTINGS_MODULE = "settings"
