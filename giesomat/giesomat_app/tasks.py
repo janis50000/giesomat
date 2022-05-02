@@ -1,6 +1,6 @@
 from celery import shared_task
 from .backend_logic.make_plants_thirsty import make_plants_thirsty
-from celery import app
+from celery import celery_app
 
 
 
