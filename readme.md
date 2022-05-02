@@ -105,6 +105,7 @@ Now you are ready to rumble
 ```
 cd giesomat/giesomat
 python manage.py runserver
+python3 manage.py runserver 0.0.0.0:8000
 ```
 
 
