@@ -4,7 +4,9 @@ import django
 #from celery.schedules import crontab
 from django.conf import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.celeryconfig')
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.celeryconfig')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.settings')
+
 #django.setup()
 
 #app = Celery('tasks', broker='amqp://guest@localhost//')
