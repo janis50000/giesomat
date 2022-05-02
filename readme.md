@@ -38,6 +38,7 @@ docker pull rabbitmq:3.10.0-rc.3-management-alpine
 Run the docker image:
 ```
 docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.10.0-rc.3-management-alpine
+```
 Check the status of your container
 ```
 docker ps -a
@@ -84,7 +85,7 @@ sudo nano /etc/rc.local
 Edit this file with the following lines and save:
 ```
 docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.10.0-rc.3-management-alpine &
-python -c 'from /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py import boot_rpi; boot_rpi()' &
+python /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py &
 python -c 'from /home/pi/giesomat/giesomat/giesomat_app/backend_logic/initialize.py import initialize_hardware; initialize_hardware()' &
 ```
 
