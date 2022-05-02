@@ -5,7 +5,7 @@ import django
 from django.conf import settings
 
 
-os.environ.setdefault['DJANGO_SETTINGS_MODULE']
+os.environ.setdefault('DJANGO_SETTINGS_MODULE')
 #django.setup()
 
 #app = Celery('tasks', broker='amqp://guest@localhost//')
