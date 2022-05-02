@@ -1,8 +1,14 @@
 import os
 from celery import Celery
+import django
 #from celery.schedules import crontab
 from django.conf import settings
 
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'giesomat_app.settings'
+django.setup()
+
+#app = Celery('tasks', broker='amqp://guest@localhost//')
 
 #Rabbit MQ Broker is configured in overall settings.
 app = Celery('giesomat_app')

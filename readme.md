@@ -89,6 +89,13 @@ python /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py &
 python -c 'from /home/pi/giesomat/giesomat/giesomat_app/backend_logic/initialize.py import initialize_hardware; initialize_hardware()' &
 ```
 
+To Do: 
+
+Run Worker:
+cd giesomat/giesomat
+celery -A giesomat_app worker --loglevel=INFO
+
+
 Obsolete
 #python /home/pi/giesomat/init_pins_on_boot.py &
 #python /home/pi/giesomat/relay_test.py &
@@ -130,3 +137,14 @@ THIRSTY => THIRSTY: Sensor (still) below Threshold
 THIRSTY => WATERED: Plant has been watered
 WATERED => HAPPY: Sensor above Threshold
 WATERED => THIRSTY: SENSOR (still) below Threshold
+
+
+##Jans Pin Config:
+Pump: 26
+Valve 1: 19
+Valve 2: 13
+Valve 3: 6
+Valve 4: 5
+
+#GND => 26 => 19 => 13 => 6 => 5 (left to right in RPI)
+1 2 3 4 
