@@ -1,5 +1,8 @@
 from celery import shared_task
 from .backend_logic.make_plants_thirsty import make_plants_thirsty
+from celery import app
+
+
 
 #ToDo Jan: Add 3 tasks: Read sensors, water plants based on sensor values and water plants based on schedule
 

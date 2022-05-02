@@ -4,7 +4,6 @@ import django
 #from celery.schedules import crontab
 from django.conf import settings
 
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat_app.settings')
 #django.setup()
 
@@ -17,4 +16,5 @@ app = Celery('giesomat_app')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 #Load task modules from all registered Django apps
-app.autodiscover_tasks()
+#app.autodiscover_tasks()
+app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
