@@ -5,13 +5,6 @@ from django.conf import settings
 from django.apps import apps 
 
 
-
-
-#from celery import shared_task
-#from .backend_logic.make_plants_thirsty import make_plants_thirsty
-#from .backend_logic.water_thirsty_plants import water_thirsty_plants
-
-
 #Hier sind noch 2 weitere Optionen:
 #https://localcoder.org/celery-auto-discovery-does-not-find-tasks-module-in-app
 
@@ -24,8 +17,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'giesomat.settings')
 #django.setup()
 #settings.configure()
 #Rabbit MQ Broker is configured in overall settings.
-#app = Celery('giesomat_app')
-app = Celery('giesomat')
+app = Celery('giesomat_app')
+#app = Celery('giesomat')
 
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
@@ -35,10 +28,7 @@ app.autodiscover_tasks()
 #app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 #app.autodiscover_tasks(lambda: [n.name for n in apps.get_app_configs()])
 
-'''
-if __name__ == '__main__':
-    app.start()
-'''
+
 @app.task(bind=True)
 def debug_task(self):
     print(f'Request: {self.request!r}')

@@ -1,9 +1,6 @@
 #Giesomat
 
-
-```
 This is a leraning project where we built a plant watering system based driven by a raspberry pi.
-```
 
 ## SSH to the RPI
 
@@ -13,13 +10,13 @@ exit ssh
 ```
 
 
-##Installation
+## Installation
 
 ```
 sudo apt-get update && sudo apt-get upgrage
 ```
 
-###Install docker
+### Install docker
 ```
 curl -SSL https://get.docker.com | sh
 ```
@@ -55,26 +52,47 @@ git config --global user.email email.adress@gmail.com
 git clone https://github.com/janis50000/giesomat
 ```
 
-Install dependencies
+### Install dependencies
 navigate to the giesomat repo before installing dependencies.
 ```
 pip install --upgrade pip
 pip install --no-cache-dir -r requirements.txt
 ```
 
-Configure the Django app
+### Configure the Django app
 
 ```
 python3 -m django makemigrations --settings=giesomat.settings
 python3 -m django migrate --settings=giesomat.settings
 ```
 
-Create a superuser for your app
+### Create a superuser for your app
 ```
 python3 manage.py createsuperuser
 ```
 
-Make sure that the RPI gets automatically setup on boot:
+### Run Celery Worker and Beat:
+```
+cd giesomat/giesomat
+celery -A giesomat_app worker --loglevel=INFO --detach
+celery -A giesomat_app beat --loglevel=INFO --detach
+```
+
+### Test if everything works as designed
+```
+cd giesomat/giesomat
+python manage.py test giesomat_app
+```
+
+### Start the server
+Now you are ready to rumble
+```
+cd giesomat/giesomat
+python manage.py runserver
+python3 manage.py runserver 0.0.0.0:8000
+```
+
+### Make sure that the RPI gets automatically setup on boot:
 
 To execute the boot scripts script on boot up, do the following:
 cd .. to the root of the rpi and navigate tho the following file:
@@ -88,49 +106,24 @@ docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbit
 python /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py &
 python -c 'from /home/pi/giesomat/giesomat/giesomat_app/backend_logic/initialize.py import initialize_hardware; initialize_hardware()' &
 cd &
-cd giesomat/giesomat
+cd giesomat/giesomat &
+celery -A giesomat_app beat --loglevel=INFO --detach &
+celery -A giesomat_app worker --loglevel=INFO --detach &
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
-To Do: 
-
-Run Worker:
-cd giesomat/giesomat
-celery -A giesomat_app worker --loglevel=INFO --detach
-
-
-Obsolete
-#python /home/pi/giesomat/init_pins_on_boot.py &
-#python /home/pi/giesomat/relay_test.py &
-$ python -c 'from foo import hello; print hello()'
-
-
-Test if everything works as designed
-```
-cd giesomat/giesomat
-python manage.py test giesomat_app
-```
-
-Now you are ready to rumble
-```
-cd giesomat/giesomat
-python manage.py runserver
-python3 manage.py runserver 0.0.0.0:8000
-```
-
-
-##Main Cababilities:
+## Main System Cababilities:
 UI to display current values in a gauge (Gießcounter per day or last sensor value)
 UI to display values over time (Sensor Wert über den Tag, Flüssigkeit über die Zeit)
 Admin views to maintain plants, the watering hardware and schedulers
 
-###3 Cron Jobs. 
+### 3 Cron Jobs. 
 - 1 Job to read the sensors
 - 1 Job to water plants based on humidity level
 - 1 Job to water plants based on a fixed schedule
 
 
-###Plant States:
+### Plant States:
 - HAPPY
 - THIRSTY
 - WATERED
@@ -142,7 +135,7 @@ WATERED => HAPPY: Sensor above Threshold
 WATERED => THIRSTY: SENSOR (still) below Threshold
 
 
-##Jans Pin Config:
+## Jans Pin Config:
 Pump: 26
 Valve 1: 19
 Valve 2: 13

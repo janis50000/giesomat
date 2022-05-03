@@ -20,4 +20,6 @@ rabbitmqctl set_permissions -p / giesomat ".*" ".*" ".*"
 
 
 Start celery worker:
-celery -A giesomat_app worker --loglevel=INFO
+celery -A giesomat worker --loglevel=INFO
+
+celery -A giesomat beat --loglevel=INFO
