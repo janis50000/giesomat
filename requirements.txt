@@ -1,4 +1,4 @@
 Django
-django-celery-beat
+django-celery-beat==2.2.1
 django-fsm==2.8.0
 

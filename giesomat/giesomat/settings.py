@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django_celery_beat',
-    'giesomat_app.apps.GiesomatAppConfig',
+    'giesomat_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+#    'giesomat_app.apps.GiesomatAppConfig',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,6 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
-CELERY_IMPORTS = ('giesomat_app.tasks',)
-
-#export DJANGO_SETTINGS_MODULE = "settings"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

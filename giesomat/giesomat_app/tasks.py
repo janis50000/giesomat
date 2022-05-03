@@ -1,15 +1,15 @@
 from celery import shared_task
 from .backend_logic.make_plants_thirsty import make_plants_thirsty
-from celery import celery_app
+from .backend_logic.water_thirsty_plants import water_thirsty_plants
 
-
-
-#ToDo Jan: Add 3 tasks: Read sensors, water plants based on sensor values and water plants based on schedule
+#from giesomat_app.celery import app
 
 #@shared_task(name="read_plant_humidity", bind=True, default_retry_delay=300, max_retries=3)
+#@app.task(name="read_plant_humidity", bind=True, default_retry_delay=300, max_retries=3)
 @shared_task(name="read_plant_humidity", bind=True, default_retry_delay=300, max_retries=3)
 def read_plant_humidity(self):
     try:
+        #ToDo
         print("Read plant humidity.")
         return
 
@@ -20,7 +20,7 @@ def read_plant_humidity(self):
 @shared_task(name="water_all_thirsty_plants", bind=True, default_retry_delay=300, max_retries=3)
 def water_all_thirsty_plants(self):
     try:
-        print("Water plants based on humidity.")
+        water_thirsty_plants()
         return
 
     except Exception:
@@ -31,7 +31,6 @@ def water_all_thirsty_plants(self):
 def make_plants_thirsty_on_schedule(self):
     try:
         make_plants_thirsty()
-        print("Water plants based on schedule.")
         return
 
     except Exception:
