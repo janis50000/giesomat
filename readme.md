@@ -112,6 +112,12 @@ celery -A giesomat_app worker --loglevel=INFO --detach &
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
+The initialization script is still buggy - it is not importing the other packages properly.
+Command is also buggy. cd to
+cd /giesomat/giesomat/giesomat_app/backend_logic
+and then 
+python -c 'from initialize import *; initialize_hardware()' 
+
 ## Main System Cababilities:
 UI to display current values in a gauge (Gießcounter per day or last sensor value)
 UI to display values over time (Sensor Wert über den Tag, Flüssigkeit über die Zeit)
