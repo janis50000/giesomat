@@ -34,7 +34,7 @@ pump_time_per_plant = water_need/water_flow_per_minute * 60
 
 i = 0
 
-while i<= GIESOMAT_RUNS:
+while i< GIESOMAT_RUNS:
 
     pump_on(PIN_PUMP)    
 
