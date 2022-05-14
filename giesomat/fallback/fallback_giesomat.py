@@ -36,14 +36,14 @@ i = 0
 
 while i<= GIESOMAT_RUNS:
 
-    pump_on()    
+    pump_on(PIN_PUMP)    
 
     for valve in PINS_VALVE:
         open_valve(valve)
         time.sleep(pump_time_per_plant)
         close_valve(valve)
         
-    pump_off()
+    pump_off(PIN_PUMP)
     time.sleep(TIME)
     i = i +1
 
