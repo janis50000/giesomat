@@ -24,7 +24,8 @@ PINS_VALVE = [19,6,5]
 
 init_gpio([], [PIN_PUMP, PINS_VALVE])
 
-TIME = 60*60*12 # seconds - twice a day
+#TIME = 60*60*12 # seconds - twice a day
+TIME = 30
 GIESOMAT_RUNS = 1 # number of runs
 
 water_need = 250 #ml
@@ -32,10 +33,10 @@ water_flow_per_minute = 3000 #ml 10 seconds for 500 ml => 3l
 
 #pump_time_per_plant = water_need/water_flow_per_minute * 60
 pump_time_per_plant = 10 #currently it is 10 seconds but that is too long. should be 2 times 6 seconds (it takes a bit more than one second until water is in at the valves)
-j=0
+#j=0
 
-#while True:
-while j< GIESOMAT_RUNS:
+while True:
+#while j< GIESOMAT_RUNS:
     i = 0
     pump_on(PIN_PUMP)    
 
