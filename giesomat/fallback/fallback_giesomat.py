@@ -12,7 +12,7 @@ GPIO.setmode(GPIO.BCM)
 #Hard code, while init script is still buggy.
 PIN_PUMP = 26
 #PINS_VALVE = [19, 13, 6, 5] #GND => 26 => 19 => 13 => 6 => 5 (left to right in RPI)
-PINS_VALVE = [19]
+PINS_VALVE = [19,6,5]
 
 ## Jans Pin Config:
 #Pump: 26
@@ -24,26 +24,30 @@ PINS_VALVE = [19]
 
 init_gpio([], [PIN_PUMP, PINS_VALVE])
 
-TIME = 10 # seconds
-GIESOMAT_RUNS = 1 # number of test runs
+TIME = 60*60*12 # seconds - twice a day
+GIESOMAT_RUNS = 1 # number of runs
 
-water_need = 100 #ml
-water_flow_per_minute = 600 #ml
+water_need = 250 #ml
+water_flow_per_minute = 3000 #ml 10 seconds for 500 ml => 3l
 
-pump_time_per_plant = water_need/water_flow_per_minute * 60
+#pump_time_per_plant = water_need/water_flow_per_minute * 60
+pump_time_per_plant = 6 #currently it is 10 seconds but that is too long. should be 2 times 6 seconds (it takes a bit more than one second until water is in at the valves)
 
-i = 0
 
-while i< GIESOMAT_RUNS:
-
+while True:
+#while i< GIESOMAT_RUNS:
+    i = 0
     pump_on(PIN_PUMP)    
 
     for valve in PINS_VALVE:
         open_valve(valve)
-        time.sleep(pump_time_per_plant)
+        if i==0:
+            time.sleep(pump_time_per_plant*1.2)
+        else:
+            time.sleep(pump_time_per_plant)
         close_valve(valve)
-        
+        i = i +1
     pump_off(PIN_PUMP)
     time.sleep(TIME)
-    i = i +1
+    
 
