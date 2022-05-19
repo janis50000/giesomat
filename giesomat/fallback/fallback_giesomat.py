@@ -31,11 +31,11 @@ water_need = 250 #ml
 water_flow_per_minute = 3000 #ml 10 seconds for 500 ml => 3l
 
 #pump_time_per_plant = water_need/water_flow_per_minute * 60
-pump_time_per_plant = 6 #currently it is 10 seconds but that is too long. should be 2 times 6 seconds (it takes a bit more than one second until water is in at the valves)
+pump_time_per_plant = 8 #currently it is 10 seconds but that is too long. should be 2 times 6 seconds (it takes a bit more than one second until water is in at the valves)
+j=0
 
-
-while True:
-#while i< GIESOMAT_RUNS:
+#while True:
+while j< GIESOMAT_RUNS:
     i = 0
     pump_on(PIN_PUMP)    
 
