@@ -76,6 +76,7 @@ python3 manage.py createsuperuser
 cd giesomat/giesomat
 celery -A giesomat_app worker --loglevel=INFO --detach
 celery -A giesomat_app beat --loglevel=INFO --detach
+celery -A giesomat_app status
 ```
 
 ### Test if everything works as designed
@@ -88,8 +89,9 @@ python manage.py test giesomat_app
 Now you are ready to rumble
 ```
 cd giesomat/giesomat
-python manage.py runserver
-python3 manage.py runserver 0.0.0.0:8000
+python manage.py runserver (During development on developer machine)
+python3 manage.py runserver 0.0.0.0:8000 (During development on target)
+gunicorn giesomat.wsgi --bind 0.0.0.0:8080 --daemon (For production)
 ```
 
 ### Make sure that the RPI gets automatically setup on boot:
@@ -106,9 +108,9 @@ docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbit
 python /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py &
 cd &
 cd giesomat/giesomat &
-celery -A giesomat_app beat --loglevel=INFO --detach &
 celery -A giesomat_app worker --loglevel=INFO --detach &
-gunicorn giesomat.wsgi
+celery -A giesomat_app beat --loglevel=INFO --detach &
+gunicorn giesomat.wsgi --bind 0.0.0.0:8080 --daemon &
 python -c 'from /home/pi/giesomat/giesomat/giesomat_app/backend_logic/initialize.py import initialize_hardware; initialize_hardware()'
 
 ```
@@ -154,3 +156,6 @@ Valve 4: 5
 
 #GND => 26 => 19 => 13 => 6 => 5 (left to right in RPI)
 1 2 3 4 
+
+## Optimization potentials
+Use a reverse proxy like nginx in front of the webserver (gunicorn)
