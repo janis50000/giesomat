@@ -55,9 +55,11 @@ git clone https://github.com/janis50000/giesomat
 ### Install dependencies
 navigate to the giesomat repo before installing dependencies.
 ```
-pip install --upgrade pip
-pip install --no-cache-dir -r requirements.txt
+sudo pip install --upgrade pip
+sudo pip install --no-cache-dir -r requirements.txt
 ```
+SUDO!!!!
+
 
 ### Configure the Django app
 
