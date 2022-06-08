@@ -97,6 +97,19 @@ gunicorn giesomat.wsgi --bind 0.0.0.0:8080 --daemon (For production)
 ### Make sure that the RPI gets automatically setup on boot:
 
 To execute the boot scripts script on boot up, do the following:
+
+Make the bash script executable
+'''
+cd 
+cd giesomat/giesomat
+chmod 755 boot_giesomat.sh
+'''
+Add job on boot:
+'''
+crontab -e
+Add a line
+@reboot /home/pi/giesomat/giesomat/boot_giesomat.sh
+'''
 cd .. to the root of the rpi and navigate tho the following file:
 ```
 sudo nano /etc/rc.local
@@ -104,6 +117,9 @@ sudo nano /etc/rc.local
 
 Edit this file with the following lines and save:
 ```
+
+/etc/init.d/cron/start
+
 docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.10.0-rc.3-management-alpine &
 python /home/pi/giesomat/giesomat/giesomat_app/rpi/boot_rpi.py &
 cd &
