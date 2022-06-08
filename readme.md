@@ -109,6 +109,8 @@ Add job on boot:
 crontab -e
 Add a line
 @reboot /home/pi/giesomat/giesomat/boot_giesomat.sh
+@reboot su -l -c /home/pi/giesomat/giesomat/boot_giesomat.sh pi
+
 '''
 cd .. to the root of the rpi and navigate tho the following file:
 ```

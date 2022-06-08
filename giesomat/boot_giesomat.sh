@@ -2,6 +2,7 @@
 #Script to boot the giesomat app
 
 docker run -d --rm --hostname giesomat-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.10.0-rc.3-management-alpine #Run the rabbit MQ container
+sudo -u pi -s
 cd 
 cd giesomat/giesomat
 gunicorn giesomat.wsgi --bind 0.0.0.0:8080 --daemon #Start the django application via gunicorn
