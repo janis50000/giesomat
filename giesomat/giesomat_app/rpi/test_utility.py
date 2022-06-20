@@ -25,3 +25,6 @@ class GPIO():
             return 1000 #return 1000 for odd pins
 
         return
+
+    def cleanup():
+        return

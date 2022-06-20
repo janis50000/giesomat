@@ -1,4 +1,4 @@
-from ..rpi.raspberry_gpio_control import setpin_high, setpin_low, read_pin
+from ..rpi.raspberry_gpio_control import setpin_high, setpin_low, read_pin, cleanup, initialize_input_pin, initialize_output_pin
 
 def pump_on(pump_gpio):
     setpin_low(pump_gpio)

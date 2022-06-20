@@ -2,6 +2,7 @@ from ..models import Plant, PlantTechnical, Pump, Valve, PlantHistoryWater
 from .giesomat_utility import pump_on, pump_off, open_valve, close_valve
 from django.utils import timezone
 import time
+from ..rpi.raspberry_gpio_control import cleanup, initialize_input_pin, initialize_output_pin
 
 
 def water_thirsty_plants():
@@ -39,6 +40,8 @@ def pump_time_seconds(water_need, water_flow_per_minute):
     return water_need / water_flow_per_minute * 60
 
 def water_plant(pump_time, pump, valve):
+    initialize_output_pin(pump.gpio_pin)
+    initialize_output_pin(valve.gpio_pin)
     pump_on(pump.gpio_pin)
     open_valve(valve.gpio_pin)
     #wait...
@@ -48,6 +51,7 @@ def water_plant(pump_time, pump, valve):
     #Wait to flush the remaining water from the piping/valve
     time.sleep(int(valve.time_offset))
     close_valve(valve.gpio_pin)
+    cleanup()
     return
 
 def add_measurement(plant, water_volume, timestamp):

@@ -39,3 +39,7 @@ def setpin_low(pin_id):
 def read_pin(pin_id):
     value = GPIO.input(pin_id)
     return value
+
+def cleanup():
+    GPIO.cleanup() 
+    return
